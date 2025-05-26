@@ -26,13 +26,24 @@ Este proyecto es una aplicación full-stack con un frontend en React y un backen
 ### Demo Credentials
 ![Captura de pantalla 2025-05-26 012557](https://github.com/user-attachments/assets/63c86dde-02f0-4fdd-9582-e82c540aa653)
 
+### Login
+
+![Captura de pantalla 2025-05-26 111143](https://github.com/user-attachments/assets/981a8d4b-ac7e-4f0c-8240-f11fa8754383)
+
 
 ### Candidate Dashboard
 ![Captura de pantalla 2025-05-26 025702](https://github.com/user-attachments/assets/ef5b59dc-2ccb-4ed0-a1a8-52254a853180)
 
+### Apply to offers
+![Captura de pantalla 2025-05-26 112119](https://github.com/user-attachments/assets/083cc599-e633-44c5-8b7b-ecb2f015db28)
+
 
 ### Recruiter Dashboard
 ![Captura de pantalla 2025-05-26 025609](https://github.com/user-attachments/assets/c7e72de9-dc1e-4604-a980-6db44d3955d8)
+
+### Upload profile info
+![image](https://github.com/user-attachments/assets/e72648f4-9a1a-49b7-9f8f-6f7f70d8f029)
+
 
 ### Swagger - Api docs
 ![Captura de pantalla 2025-05-26 031447](https://github.com/user-attachments/assets/d81b7d11-e419-4a29-8238-6c9618d823bf)

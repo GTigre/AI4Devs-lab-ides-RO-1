@@ -2,6 +2,43 @@
 
 Este proyecto es una aplicación full-stack con un frontend en React y un backend en Express usando Prisma como ORM. El frontend se inicia con Create React App y el backend está escrito en TypeScript.
 
+## Main Features
+- Role-based authentication for Candidates and Recruiters
+- Candidate dashboard: view/apply to offers, update profile, upload CV
+- Recruiter dashboard: review candidates, manage offers, update profile
+- Secure file upload for candidate CVs
+- Responsive, modern UI with Material UI
+- Protected routes and JWT-based authentication
+- PostgreSQL database with Prisma ORM
+- Docker support for easy setup
+
+## Documentation
+- **Frontend:** React + TypeScript, located in `/frontend`
+- **Backend:** Express + TypeScript, located in `/backend`
+- **Database:** PostgreSQL, managed with Prisma
+- **Authentication:** JWT tokens, role-based access
+- **File Uploads:** Candidates can upload CVs (PDF)
+- **API Docs:** Swagger available at `/api-docs` on the backend server
+- **Environment:** Configure variables in `.env` files for both frontend and backend
+
+## Screenshots
+
+### Demo Credentials
+![Demo Credentials](screenshots/demo-credentials.png)
+
+### Candidate Dashboard
+![Candidate Dashboard](screenshots/candidate-dashboard.png)
+
+### Recruiter Dashboard
+![Recruiter Dashboard](screenshots/recruiter-dashboard.png)
+
+Add screenshots of the app running in this section. To add your own:
+1. Take screenshots of the main pages (login, candidate dashboard, recruiter dashboard, etc.)
+2. Save them in the `screenshots` directory (e.g., `screenshots/candidate-dashboard.png`)
+3. Reference them above using Markdown as shown.
+
+---
+
 ## Explicación de Directorios y Archivos
 
 - `backend/`: Contiene el código del lado del servidor escrito en Node.js.
@@ -48,7 +85,7 @@ npm install
 ```
 cd backend
 npm run build
-````
+```
 4. Inicia el servidor backend:
 ```
 cd backend

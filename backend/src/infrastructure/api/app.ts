@@ -4,6 +4,7 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import { Logger } from '../logging/Logger';
 import candidateRoutes from './routes/candidate.routes';
+import authRoutes from './routes/auth.routes';
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Mount routes
 app.use('/api/candidates', candidateRoutes);
+app.use('/auth', authRoutes);
 
 // Swagger configuration
 const swaggerOptions = {
@@ -31,7 +33,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:3010',
+        url: 'http://localhost:3001',
         description: 'Development server',
       },
     ],

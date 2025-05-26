@@ -1,162 +1,136 @@
-import { useEffect, useState } from 'react';
-import { useAppDispatch } from '../hooks/useAppDispatch';
-import { useAppSelector } from '../hooks/useAppSelector';
-import { useToast } from '../hooks/useToast';
-import { fetchCandidates, deleteCandidate } from '../store/slices/candidateSlice';
-import { Candidate } from '../types/candidate';
-import { Button } from './ui/Button';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Candidate, ProcessStatus } from '../types/candidate';
+import { listCandidates, deleteCandidate, updateProcessStatus } from '../services/api';
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from './ui/Dialog';
-import { CandidateForm } from './CandidateForm';
-import { RootState } from '../store';
+  Box,
+  Button,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+  IconButton,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  SelectChangeEvent
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
-export function CandidateList() {
-  const dispatch = useAppDispatch();
-  const { toast } = useToast();
-  const { candidates, loading, error } = useAppSelector((state: RootState) => state.candidates);
-  const [selectedCandidate, setSelectedCandidate] = useState<Candidate | undefined>();
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+export const CandidateList: React.FC = () => {
+  const navigate = useNavigate();
+  const [candidates, setCandidates] = useState<Candidate[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    dispatch(fetchCandidates());
-  }, [dispatch]);
+    fetchCandidates();
+  }, []);
 
-  const handleDelete = async (id: string) => {
+  const fetchCandidates = async () => {
     try {
-      await dispatch(deleteCandidate(id)).unwrap();
-      toast({
-        title: 'Success',
-        description: 'Candidate deleted successfully',
-      });
-    } catch (error) {
-      toast({
-        title: 'Error',
-        description: 'Failed to delete candidate',
-        variant: 'destructive',
-      });
+      const data = await listCandidates();
+      setCandidates(data);
+      setLoading(false);
+    } catch (err) {
+      setError('Failed to fetch candidates');
+      setLoading(false);
     }
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const handleDelete = async (id: string) => {
+    if (window.confirm('Are you sure you want to delete this candidate?')) {
+      try {
+        await deleteCandidate(id);
+        setCandidates(candidates.filter(c => c.id !== id));
+      } catch (err) {
+        setError('Failed to delete candidate');
+      }
+    }
+  };
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  const handleStatusChange = async (id: string, status: ProcessStatus) => {
+    try {
+      await updateProcessStatus(id, status);
+      setCandidates(candidates.map(c => 
+        c.id === id ? { ...c, processStatus: status } : c
+      ));
+    } catch (err) {
+      setError('Failed to update status');
+    }
+  };
+
+  if (loading) return <Typography>Loading...</Typography>;
+  if (error) return <Typography color="error">{error}</Typography>;
 
   return (
-    <div className="container mx-auto py-8">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Candidates</h1>
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogTrigger asChild>
-            <Button>Add Candidate</Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Add New Candidate</DialogTitle>
-            </DialogHeader>
-            <CandidateForm
-              onSuccess={() => {
-                setIsDialogOpen(false);
-                dispatch(fetchCandidates());
-              }}
-            />
-          </DialogContent>
-        </Dialog>
-      </div>
-
-      <div className="grid gap-4">
-        {candidates.map((candidate: Candidate) => (
-          <div
-            key={candidate.id}
-            className="border rounded-lg p-4 space-y-2"
-          >
-            <div className="flex justify-between items-start">
-              <div>
-                <h2 className="text-xl font-semibold">
-                  {candidate.firstName} {candidate.lastName}
-                </h2>
-                <p className="text-gray-600">{candidate.email}</p>
-                <p className="text-gray-600">{candidate.phone}</p>
-              </div>
-              <div className="flex space-x-2">
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button
-                      variant="outline"
-                      onClick={() => setSelectedCandidate(candidate)}
+    <Box sx={{ p: 3 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
+        <Typography variant="h4">Candidates</Typography>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => navigate('/candidates/new')}
+        >
+          Add Candidate
+        </Button>
+      </Box>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Status</TableCell>
+              <TableCell>Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {candidates.map((candidate) => (
+              <TableRow key={candidate.id}>
+                <TableCell>{candidate.firstName} {candidate.lastName}</TableCell>
+                <TableCell>{candidate.email}</TableCell>
+                <TableCell>
+                  <FormControl size="small">
+                    <Select
+                      value={candidate.processStatus}
+                      onChange={(e: SelectChangeEvent) => 
+                        handleStatusChange(candidate.id, e.target.value as ProcessStatus)
+                      }
                     >
-                      Edit
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>Edit Candidate</DialogTitle>
-                    </DialogHeader>
-                    <CandidateForm
-                      candidate={selectedCandidate}
-                      onSuccess={() => {
-                        dispatch(fetchCandidates());
-                      }}
-                    />
-                  </DialogContent>
-                </Dialog>
-                <Button
-                  variant="destructive"
-                  onClick={() => handleDelete(candidate.id)}
-                >
-                  Delete
-                </Button>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div>
-                <p>
-                  <span className="font-medium">Country:</span> {candidate.country}
-                </p>
-                <p>
-                  <span className="font-medium">Address:</span> {candidate.address}
-                </p>
-              </div>
-              <div>
-                <p>
-                  <span className="font-medium">Education:</span>{' '}
-                  {candidate.education}
-                </p>
-                <p>
-                  <span className="font-medium">Experience:</span>{' '}
-                  {candidate.experience}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex justify-between items-center text-sm">
-              <p>
-                <span className="font-medium">Status:</span>{' '}
-                {candidate.processStatus}
-              </p>
-              {candidate.cvUrl && (
-                <a
-                  href={candidate.cvUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline"
-                >
-                  View CV
-                </a>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+                      {Object.values(ProcessStatus).map((status) => (
+                        <MenuItem key={status} value={status}>
+                          {status}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </TableCell>
+                <TableCell>
+                  <IconButton
+                    onClick={() => navigate(`/candidates/${candidate.id}`)}
+                    color="primary"
+                  >
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton
+                    onClick={() => handleDelete(candidate.id)}
+                    color="error"
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
-} 
+}; 

@@ -12,3 +12,15 @@
 {"id":"887b86b4-8802-4596-95da-d3cdb6318449","level":"info","message":"Candidate created successfully","timestamp":"2025-05-26T04:11:00.860Z"}
 {"level":"info","message":"Listing all candidates","timestamp":"2025-05-26T04:11:00.871Z"}
 {"count":1,"level":"info","message":"Candidates listed successfully","timestamp":"2025-05-26T04:11:00.874Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-05-26T05:54:15.635Z"}
+{"level":"info","message":"API Documentation available at http://localhost:3001/api-docs","timestamp":"2025-05-26T05:54:15.640Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-05-26T07:04:51.745Z"}
+{"level":"info","message":"API Documentation available at http://localhost:3001/api-docs","timestamp":"2025-05-26T07:04:51.749Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-05-26T07:07:49.437Z"}
+{"level":"info","message":"API Documentation available at http://localhost:3001/api-docs","timestamp":"2025-05-26T07:07:49.441Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-05-26T07:08:03.258Z"}
+{"level":"info","message":"API Documentation available at http://localhost:3001/api-docs","timestamp":"2025-05-26T07:08:03.262Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-05-26T07:09:06.494Z"}
+{"level":"info","message":"API Documentation available at http://localhost:3001/api-docs","timestamp":"2025-05-26T07:09:06.498Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-05-26T07:15:00.001Z"}
+{"level":"info","message":"API Documentation available at http://localhost:3001/api-docs","timestamp":"2025-05-26T07:15:00.004Z"}

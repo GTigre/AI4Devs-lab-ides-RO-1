@@ -2,6 +2,7 @@ import { Candidate } from '../../domain/entities/Candidate';
 import { ICandidateRepository } from '../../domain/repositories/ICandidateRepository';
 import { ValidationError, NotFoundError, DuplicateError } from '../../domain/errors/ApplicationError';
 import { Logger } from '../../infrastructure/logging/Logger';
+import { ProcessStatus } from '@prisma/client';
 
 export class CandidateService {
   constructor(private readonly candidateRepository: ICandidateRepository) {}
@@ -31,10 +32,10 @@ export class CandidateService {
     }
 
     try {
-      // Create new candidate
+      // Create new candidate with IN_REVIEW status
       const candidate = new Candidate({
         ...candidateData,
-        processStatus: 'NEW',
+        processStatus: 'IN_REVIEW',
         consentAcceptedAt: candidateData.consentAccepted ? new Date() : undefined,
       });
 
@@ -47,7 +48,43 @@ export class CandidateService {
     }
   }
 
-  async getCandidate(id: string): Promise<Candidate | null> {
+  async getCandidateByUserId(userId: string): Promise<Candidate> {
+    Logger.info('Fetching candidate by user ID', { userId });
+    try {
+      const candidate = await this.candidateRepository.findByUserId(userId);
+      if (!candidate) {
+        Logger.warn('Candidate not found for user', { userId });
+        throw new NotFoundError('Candidate not found');
+      }
+      return candidate;
+    } catch (error) {
+      Logger.error('Error fetching candidate by user ID', { error, userId });
+      throw error;
+    }
+  }
+
+  async updateCandidateByUserId(userId: string, candidateData: Partial<Candidate>): Promise<Candidate> {
+    Logger.info('Updating candidate by user ID', { userId });
+    try {
+      const existingCandidate = await this.candidateRepository.findByUserId(userId);
+      if (!existingCandidate) {
+        Logger.warn('Candidate not found for update', { userId });
+        throw new NotFoundError('Candidate not found');
+      }
+
+      // Remove processStatus from update data for candidates
+      const { processStatus, ...updateData } = candidateData;
+
+      const updated = await this.candidateRepository.update(existingCandidate.id, updateData);
+      Logger.info('Candidate updated successfully', { id: updated.id });
+      return updated;
+    } catch (error) {
+      Logger.error('Error updating candidate by user ID', { error, userId });
+      throw error;
+    }
+  }
+
+  async getCandidate(id: string): Promise<Candidate> {
     Logger.info('Fetching candidate', { id });
     try {
       const candidate = await this.candidateRepository.findById(id);
@@ -85,6 +122,24 @@ export class CandidateService {
       return updated;
     } catch (error) {
       Logger.error('Error updating candidate', { error, id, candidateData });
+      throw error;
+    }
+  }
+
+  async updateProcessStatus(id: string, status: ProcessStatus): Promise<Candidate> {
+    Logger.info('Updating candidate process status', { id, status });
+    try {
+      const existingCandidate = await this.candidateRepository.findById(id);
+      if (!existingCandidate) {
+        Logger.warn('Candidate not found for status update', { id });
+        throw new NotFoundError('Candidate not found');
+      }
+
+      const updated = await this.candidateRepository.update(id, { processStatus: status });
+      Logger.info('Candidate status updated successfully', { id, status });
+      return updated;
+    } catch (error) {
+      Logger.error('Error updating candidate status', { error, id, status });
       throw error;
     }
   }

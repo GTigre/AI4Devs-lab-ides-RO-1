@@ -1,10 +1,19 @@
 import dotenv from 'dotenv';
 import app from './infrastructure/api/app';
+import candidateRoutes from './infrastructure/api/routes/candidate.routes';
+import authRoutes from './infrastructure/api/routes/auth.routes';
+import { Logger } from './infrastructure/logging/Logger';
 
 dotenv.config();
 
-const port = 3010;
+const PORT = process.env.PORT || 3001;
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+// Register routes
+app.use('/api/candidates', candidateRoutes);
+app.use('/auth', authRoutes);
+
+// Start server
+app.listen(PORT, () => {
+  Logger.info(`Server is running on port ${PORT}`);
+  Logger.info(`API Documentation available at http://localhost:${PORT}/api-docs`);
 });

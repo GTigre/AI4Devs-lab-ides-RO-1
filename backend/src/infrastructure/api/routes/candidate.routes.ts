@@ -5,10 +5,14 @@ import { FileStorageService } from '../../storage/FileStorageService';
 import { upload } from '../middleware/fileUpload';
 import { validate, candidateSchema } from '../middleware/validation';
 import { Logger } from '../../logging/Logger';
+import { CandidateController } from '../controllers/CandidateController';
+import { authenticate, requireRole } from '../middleware/auth.middleware';
+import { UserRole } from '@prisma/client';
 
 const router = Router();
 const candidateService = new CandidateService(new PrismaCandidateRepository());
 const fileStorageService = new FileStorageService();
+const candidateController = new CandidateController();
 
 /**
  * @swagger
@@ -104,7 +108,7 @@ router.post('/', validate(candidateSchema), async (req, res, next) => {
  *               items:
  *                 $ref: '#/components/schemas/Candidate'
  */
-router.get('/', async (req, res, next) => {
+router.get('/', requireRole([UserRole.RECRUITER]), async (req, res, next) => {
   try {
     const candidates = await candidateService.listCandidates();
     res.json(candidates);
@@ -243,5 +247,19 @@ router.post('/:id/cv', upload.single('file'), async (req, res, next) => {
     next(error);
   }
 });
+
+// Protected routes
+router.use(authenticate);
+
+// Candidate routes
+router.get('/me', requireRole([UserRole.CANDIDATE]), candidateController.getMyProfile);
+router.put('/me', requireRole([UserRole.CANDIDATE]), candidateController.updateMyProfile);
+
+// Recruiter routes
+router.get('/', requireRole([UserRole.RECRUITER]), candidateController.listCandidates);
+router.get('/:id', requireRole([UserRole.RECRUITER]), candidateController.getCandidate);
+router.put('/:id', requireRole([UserRole.RECRUITER]), candidateController.updateCandidate);
+router.put('/:id/status', requireRole([UserRole.RECRUITER]), candidateController.updateProcessStatus);
+router.delete('/:id', requireRole([UserRole.RECRUITER]), candidateController.deleteCandidate);
 
 export default router; 

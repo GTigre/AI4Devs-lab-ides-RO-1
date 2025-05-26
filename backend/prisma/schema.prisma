@@ -14,7 +14,18 @@ datasource db {
 }
 
 // Domain Models
-model candidate {
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  role      UserRole @default(CANDIDATE)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Candidate {
   id              String    @id @default(uuid())
   firstName       String
   lastName        String
@@ -24,7 +35,7 @@ model candidate {
   address         String
   education       String
   experience      String
-  processStatus   ProcessStatus @default(NEW)
+  processStatus   ProcessStatus @default(IN_REVIEW)
   cvUrl           String?
   consentAccepted Boolean   @default(false)
   consentAcceptedAt DateTime?
@@ -36,6 +47,11 @@ model candidate {
 }
 
 // Enums
+enum UserRole {
+  CANDIDATE
+  RECRUITER
+}
+
 enum ProcessStatus {
   NEW
   IN_REVIEW
@@ -45,7 +61,7 @@ enum ProcessStatus {
 }
 
 // Reference Data Models
-model educationOption {
+model EducationOption {
   id          String    @id @default(uuid())
   name        String    @unique
   description String?
@@ -55,7 +71,7 @@ model educationOption {
   @@map("education_options")
 }
 
-model experienceOption {
+model ExperienceOption {
   id          String    @id @default(uuid())
   name        String    @unique
   description String?

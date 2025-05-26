@@ -1,7 +1,6 @@
-import React, { useState, ChangeEvent, useEffect } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { UserRole } from '../types/user';
 import {
   Box,
   TextField,
@@ -10,62 +9,49 @@ import {
   Container,
   FormControl,
   InputLabel,
-  Select,
-  MenuItem,
-  Alert,
-  SelectChangeEvent
+  Alert
 } from '@mui/material';
 
-interface RegisterProps {
-  isEditMode?: boolean;
-}
-
-export const Register: React.FC<RegisterProps> = ({ isEditMode = false }) => {
+export const Register: React.FC = () => {
   const navigate = useNavigate();
-  const { register, user } = useAuth();
+  const { register } = useAuth();
   const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
-    name: '',
-    role: UserRole.CANDIDATE
+    phone: '',
+    country: '',
+    address: '',
+    education: '',
+    experience: '',
+    consentAccepted: false
   });
   const [error, setError] = useState('');
-
-  useEffect(() => {
-    if (isEditMode && user) {
-      setFormData({
-        email: user.email,
-        password: '',
-        name: user.name,
-        role: user.role
-      });
-    }
-  }, [isEditMode, user]);
+  const [showPasswordAlert, setShowPasswordAlert] = useState(false);
+  const [registeredPassword, setRegisteredPassword] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleRoleChange = (e: SelectChangeEvent) => {
-    setFormData(prev => ({
-      ...prev,
-      role: e.target.value as UserRole
+      [name]: type === 'checkbox' ? checked : value
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-
+    if (!formData.consentAccepted) {
+      setError('You must accept the consent to proceed.');
+      return;
+    }
     try {
-      await register(formData.email, formData.password, formData.name, formData.role);
-      navigate('/');
+      await register(formData);
+      setRegisteredPassword(formData.password);
+      setShowPasswordAlert(true);
     } catch (err) {
-      setError(isEditMode ? 'Profile update failed. Please try again.' : 'Registration failed. Please try again.');
+      setError('Registration failed. Please try again.');
     }
   };
 
@@ -80,7 +66,7 @@ export const Register: React.FC<RegisterProps> = ({ isEditMode = false }) => {
         }}
       >
         <Typography component="h1" variant="h5">
-          {isEditMode ? 'Update Profile' : 'Sign up'}
+          Sign up
         </Typography>
         {error && (
           <Alert severity="error" sx={{ mt: 2, width: '100%' }}>
@@ -92,12 +78,23 @@ export const Register: React.FC<RegisterProps> = ({ isEditMode = false }) => {
             margin="normal"
             required
             fullWidth
-            id="name"
-            label="Full Name"
-            name="name"
-            autoComplete="name"
+            id="firstName"
+            label="First Name"
+            name="firstName"
+            autoComplete="given-name"
             autoFocus
-            value={formData.name}
+            value={formData.firstName}
+            onChange={handleChange}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="lastName"
+            label="Last Name"
+            name="lastName"
+            autoComplete="family-name"
+            value={formData.lastName}
             onChange={handleChange}
           />
           <TextField
@@ -110,55 +107,111 @@ export const Register: React.FC<RegisterProps> = ({ isEditMode = false }) => {
             autoComplete="email"
             value={formData.email}
             onChange={handleChange}
-            disabled={isEditMode}
           />
           <TextField
             margin="normal"
             required
             fullWidth
             name="password"
-            label={isEditMode ? 'New Password (leave blank to keep current)' : 'Password'}
+            label="Password"
             type="password"
             id="password"
-            autoComplete={isEditMode ? 'new-password' : 'new-password'}
+            autoComplete="new-password"
             value={formData.password}
             onChange={handleChange}
           />
-          {!isEditMode && (
-            <FormControl fullWidth margin="normal">
-              <InputLabel id="role-label">Role</InputLabel>
-              <Select
-                labelId="role-label"
-                id="role"
-                name="role"
-                value={formData.role}
-                label="Role"
-                onChange={handleRoleChange}
-              >
-                <MenuItem value={UserRole.CANDIDATE}>Candidate</MenuItem>
-                <MenuItem value={UserRole.RECRUITER}>Recruiter</MenuItem>
-              </Select>
-            </FormControl>
-          )}
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="phone"
+            label="Phone"
+            name="phone"
+            autoComplete="tel"
+            value={formData.phone}
+            onChange={handleChange}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="country"
+            label="Country"
+            name="country"
+            autoComplete="country"
+            value={formData.country}
+            onChange={handleChange}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="address"
+            label="Address"
+            name="address"
+            autoComplete="street-address"
+            value={formData.address}
+            onChange={handleChange}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="education"
+            label="Education"
+            name="education"
+            autoComplete="education"
+            value={formData.education}
+            onChange={handleChange}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="experience"
+            label="Experience"
+            name="experience"
+            autoComplete="experience"
+            value={formData.experience}
+            onChange={handleChange}
+          />
+          <FormControl fullWidth margin="normal">
+            <Box display="flex" alignItems="center">
+              <input
+                type="checkbox"
+                id="consentAccepted"
+                name="consentAccepted"
+                checked={formData.consentAccepted}
+                onChange={handleChange}
+                style={{ marginRight: 8 }}
+              />
+              <InputLabel htmlFor="consentAccepted" style={{ position: 'static', transform: 'none' }}>
+                I accept the data processing consent.
+              </InputLabel>
+            </Box>
+          </FormControl>
           <Button
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            {isEditMode ? 'Update Profile' : 'Sign Up'}
+            Sign Up
           </Button>
-          {!isEditMode && (
-            <Button
-              fullWidth
-              variant="text"
-              onClick={() => navigate('/login')}
-            >
-              Already have an account? Sign In
-            </Button>
-          )}
+          <Button
+            fullWidth
+            variant="text"
+            onClick={() => navigate('/login')}
+          >
+            Already have an account? Sign In
+          </Button>
         </Box>
       </Box>
+      {showPasswordAlert && (
+        <Alert severity="success" sx={{ mt: 2, width: '100%' }}>
+          Your password is: {registeredPassword}
+        </Alert>
+      )}
     </Container>
   );
 }; 

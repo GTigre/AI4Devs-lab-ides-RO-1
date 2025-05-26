@@ -1,8 +1,13 @@
 import express from 'express';
-import { UserRole } from '../../../domain/entities/User';
 import { Logger } from '../../logging/Logger';
 
 const router = express.Router();
+
+// Define UserRole enum locally
+enum UserRole {
+  CANDIDATE = 'CANDIDATE',
+  RECRUITER = 'RECRUITER'
+}
 
 // Mock users for testing
 const users = [
@@ -11,6 +16,14 @@ const users = [
     email: 'candidate@example.com',
     password: 'Candidate123!',
     name: 'John Candidate',
+    firstName: 'John',
+    lastName: 'Candidate',
+    phone: '',
+    country: '',
+    address: '',
+    education: '',
+    experience: '',
+    consentAccepted: false,
     role: UserRole.CANDIDATE
   },
   {
@@ -18,6 +31,14 @@ const users = [
     email: 'recruiter@example.com',
     password: 'Recruiter123!',
     name: 'Jane Recruiter',
+    firstName: 'Jane',
+    lastName: 'Recruiter',
+    phone: '',
+    country: '',
+    address: '',
+    education: '',
+    experience: '',
+    consentAccepted: false,
     role: UserRole.RECRUITER
   }
 ];
@@ -38,24 +59,43 @@ router.post('/login', (req, res) => {
 
 // Register endpoint
 router.post('/register', (req, res) => {
-  const { email, password, name, role } = req.body;
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    phone,
+    country,
+    address,
+    education,
+    experience,
+    consentAccepted
+  } = req.body;
 
   // Check if user already exists
   if (users.some(u => u.email === email)) {
     return res.status(400).json({ message: 'User already exists' });
   }
 
-  // Create new user
+  // Create new candidate user
   const newUser = {
     id: String(users.length + 1),
+    name: firstName + ' ' + lastName,
+    firstName,
+    lastName,
     email,
     password,
-    name,
-    role
+    phone,
+    country,
+    address,
+    education,
+    experience,
+    consentAccepted,
+    role: UserRole.CANDIDATE
   };
 
   users.push(newUser);
-  Logger.info(`New user registered: ${email}`);
+  Logger.info(`New candidate registered: ${email}`);
 
   // In a real app, you would generate a JWT token here
   const token = 'mock-jwt-token';

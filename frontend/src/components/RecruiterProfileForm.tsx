@@ -42,7 +42,12 @@ export const RecruiterProfileForm: React.FC = () => {
       return;
     }
     try {
-      await register(formData.email, formData.password, formData.name, user.role);
+      await register({
+        email: formData.email,
+        password: formData.password,
+        name: formData.name,
+        role: user.role
+      });
       setSuccess('Profile updated successfully!');
     } catch {
       setError('Failed to update profile.');

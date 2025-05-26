@@ -24,18 +24,19 @@ Este proyecto es una aplicación full-stack con un frontend en React y un backen
 ## Screenshots
 
 ### Demo Credentials
-![Demo Credentials](screenshots/demo-credentials.png)
+![Captura de pantalla 2025-05-26 012557](https://github.com/user-attachments/assets/63c86dde-02f0-4fdd-9582-e82c540aa653)
+
 
 ### Candidate Dashboard
-![Candidate Dashboard](screenshots/candidate-dashboard.png)
+![Captura de pantalla 2025-05-26 025702](https://github.com/user-attachments/assets/ef5b59dc-2ccb-4ed0-a1a8-52254a853180)
+
 
 ### Recruiter Dashboard
-![Recruiter Dashboard](screenshots/recruiter-dashboard.png)
+![Captura de pantalla 2025-05-26 025609](https://github.com/user-attachments/assets/c7e72de9-dc1e-4604-a980-6db44d3955d8)
 
-Add screenshots of the app running in this section. To add your own:
-1. Take screenshots of the main pages (login, candidate dashboard, recruiter dashboard, etc.)
-2. Save them in the `screenshots` directory (e.g., `screenshots/candidate-dashboard.png`)
-3. Reference them above using Markdown as shown.
+### Swagger - Api docs
+![Captura de pantalla 2025-05-26 031447](https://github.com/user-attachments/assets/d81b7d11-e419-4a29-8238-6c9618d823bf)
+
 
 ---
 

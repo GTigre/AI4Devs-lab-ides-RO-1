@@ -45,6 +45,8 @@ Este proyecto es una aplicación full-stack con un frontend en React y un backen
 ![image](https://github.com/user-attachments/assets/e72648f4-9a1a-49b7-9f8f-6f7f70d8f029)
 
 
+
+
 ### Swagger - Api docs
 ![Captura de pantalla 2025-05-26 031447](https://github.com/user-attachments/assets/d81b7d11-e419-4a29-8238-6c9618d823bf)
 

@@ -13,8 +13,54 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+// Domain Models
+model candidate {
+  id              String    @id @default(uuid())
+  firstName       String
+  lastName        String
+  email           String    @unique
+  phone           String
+  country         String
+  address         String
+  education       String
+  experience      String
+  processStatus   ProcessStatus @default(NEW)
+  cvUrl           String?
+  consentAccepted Boolean   @default(false)
+  consentAcceptedAt DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  deletedAt       DateTime?
+
+  @@map("candidates")
+}
+
+// Enums
+enum ProcessStatus {
+  NEW
+  IN_REVIEW
+  DISCARDED
+  FINALIST
+  HIRED
+}
+
+// Reference Data Models
+model educationOption {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("education_options")
+}
+
+model experienceOption {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("experience_options")
 }

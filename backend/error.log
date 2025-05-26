@@ -1,0 +1,4 @@
+{"error":{"clientVersion":"5.13.0","code":"P2021","meta":{"modelName":"candidate","table":"public.candidates"},"name":"PrismaClientKnownRequestError"},"level":"error","message":"Error listing candidates","timestamp":"2025-05-26T04:06:39.331Z"}
+{"clientVersion":"5.13.0","code":"P2021","level":"error","message":"Unhandled error:","meta":{"modelName":"candidate","table":"public.candidates"},"name":"PrismaClientKnownRequestError","timestamp":"2025-05-26T04:06:39.332Z"}
+{"error":{"clientVersion":"5.13.0","code":"P2021","meta":{"modelName":"candidate","table":"public.candidates"},"name":"PrismaClientKnownRequestError"},"level":"error","message":"Error listing candidates","timestamp":"2025-05-26T04:06:39.341Z"}
+{"clientVersion":"5.13.0","code":"P2021","level":"error","message":"Unhandled error:","meta":{"modelName":"candidate","table":"public.candidates"},"name":"PrismaClientKnownRequestError","timestamp":"2025-05-26T04:06:39.342Z"}

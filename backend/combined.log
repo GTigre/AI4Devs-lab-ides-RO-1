@@ -1,0 +1,14 @@
+{"level":"info","message":"Listing all candidates","timestamp":"2025-05-26T04:06:39.233Z"}
+{"error":{"clientVersion":"5.13.0","code":"P2021","meta":{"modelName":"candidate","table":"public.candidates"},"name":"PrismaClientKnownRequestError"},"level":"error","message":"Error listing candidates","timestamp":"2025-05-26T04:06:39.331Z"}
+{"clientVersion":"5.13.0","code":"P2021","level":"error","message":"Unhandled error:","meta":{"modelName":"candidate","table":"public.candidates"},"name":"PrismaClientKnownRequestError","timestamp":"2025-05-26T04:06:39.332Z"}
+{"level":"info","message":"Listing all candidates","timestamp":"2025-05-26T04:06:39.337Z"}
+{"error":{"clientVersion":"5.13.0","code":"P2021","meta":{"modelName":"candidate","table":"public.candidates"},"name":"PrismaClientKnownRequestError"},"level":"error","message":"Error listing candidates","timestamp":"2025-05-26T04:06:39.341Z"}
+{"clientVersion":"5.13.0","code":"P2021","level":"error","message":"Unhandled error:","meta":{"modelName":"candidate","table":"public.candidates"},"name":"PrismaClientKnownRequestError","timestamp":"2025-05-26T04:06:39.342Z"}
+{"level":"info","message":"Listing all candidates","timestamp":"2025-05-26T04:10:00.983Z"}
+{"count":0,"level":"info","message":"Candidates listed successfully","timestamp":"2025-05-26T04:10:01.031Z"}
+{"level":"info","message":"Listing all candidates","timestamp":"2025-05-26T04:10:01.037Z"}
+{"count":0,"level":"info","message":"Candidates listed successfully","timestamp":"2025-05-26T04:10:01.040Z"}
+{"email":"gntigre@gmail.com","level":"info","message":"Creating new candidate","timestamp":"2025-05-26T04:11:00.846Z"}
+{"id":"887b86b4-8802-4596-95da-d3cdb6318449","level":"info","message":"Candidate created successfully","timestamp":"2025-05-26T04:11:00.860Z"}
+{"level":"info","message":"Listing all candidates","timestamp":"2025-05-26T04:11:00.871Z"}
+{"count":1,"level":"info","message":"Candidates listed successfully","timestamp":"2025-05-26T04:11:00.874Z"}

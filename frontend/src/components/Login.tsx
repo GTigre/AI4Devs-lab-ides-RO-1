@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { Box, TextField, Button, Typography, Container, Alert } from '@mui/material';
+import { Box, TextField, Button, Typography, Container, Alert, CircularProgress } from '@mui/material';
 import { UserRole } from '../types/user';
 import logo from '../assets/logo.png';
 
@@ -11,6 +11,7 @@ export const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   // If already logged in, redirect to dashboard
   if (user) {
@@ -20,6 +21,7 @@ export const Login: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setLoading(true);
 
     try {
       const response = await login(email, password);
@@ -29,8 +31,10 @@ export const Login: React.FC = () => {
       } else {
         navigate('/recruiter');
       }
-    } catch (err) {
-      setError('Invalid email or password');
+    } catch (err: any) {
+      setError(err.message || 'Invalid email or password');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -69,6 +73,7 @@ export const Login: React.FC = () => {
             autoFocus
             value={email}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+            disabled={loading}
           />
           <TextField
             margin="normal"
@@ -81,19 +86,22 @@ export const Login: React.FC = () => {
             autoComplete="current-password"
             value={password}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+            disabled={loading}
           />
           <Button
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            disabled={loading}
           >
-            Sign In
+            {loading ? <CircularProgress size={24} /> : 'Sign In'}
           </Button>
           <Button
             fullWidth
             variant="text"
             onClick={() => navigate('/register')}
+            disabled={loading}
           >
             Don't have an account? Sign Up
           </Button>

@@ -3,7 +3,7 @@ import candidateRoutes from './infrastructure/api/routes/candidate.routes';
 import authRoutes from './infrastructure/api/routes/auth.routes';
 import { Logger } from './infrastructure/logging/Logger';
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 // Register routes
 app.use('/api/candidates', candidateRoutes);

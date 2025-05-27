@@ -1,0 +1,10 @@
+{
+  "name": "recruitment-platform",
+  "version": "1.0.0",
+  "description": "A recruitment platform using React and Node.js",
+  "scripts": {
+    "start": "cd backend && npm run dev"
+  },
+  "author": "",
+  "license": "ISC"
+} 

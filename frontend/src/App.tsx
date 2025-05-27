@@ -12,6 +12,7 @@ import { CandidateProfileForm } from './components/CandidateProfileForm';
 import { RecruiterDashboard } from './components/RecruiterDashboard';
 import { RecruiterProfileForm } from './components/RecruiterProfileForm';
 import { OfferForm } from './components/OfferForm';
+import { RegisterCandidate } from './components/RegisterCandidate';
 
 // Protected Route component
 const ProtectedRoute: React.FC<{ 
@@ -133,6 +134,14 @@ function App() {
             } 
           />
           <Route 
+            path="/recruiter/register-candidate" 
+            element={
+              <ProtectedRoute allowedRoles={[UserRole.RECRUITER]}>
+                <RegisterCandidate />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
             path="/offers" 
             element={
               <ProtectedRoute allowedRoles={[UserRole.CANDIDATE]}>
@@ -150,16 +159,7 @@ function App() {
           />
           
           {/* Default route - redirects based on role */}
-          <Route 
-            path="/" 
-            element={
-              <ProtectedRoute>
-                <DefaultRoute />
-              </ProtectedRoute>
-            } 
-          />
-          
-          <Route path="*" element={<Navigate to="/login" />} />
+          <Route path="/" element={<DefaultRoute />} />
         </Routes>
       </Router>
     </AuthProvider>

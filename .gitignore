@@ -27,3 +27,10 @@ yarn-error.log*
 
 # .env
 
+# Log files
+backend/combined.log
+backend/error.log
+
+# Cursor editor state
+.cursor/
+

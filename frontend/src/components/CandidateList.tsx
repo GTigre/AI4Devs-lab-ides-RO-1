@@ -38,8 +38,8 @@ export const CandidateList: React.FC = () => {
       const data = await listCandidates();
       setCandidates(data);
       setLoading(false);
-    } catch (err) {
-      setError('Failed to fetch candidates');
+    } catch (err: any) {
+      setError(err.message || 'Failed to fetch candidates');
       setLoading(false);
     }
   };

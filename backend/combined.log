@@ -32,3 +32,57 @@
 {"level":"info","message":"API Documentation available at http://localhost:3001/api-docs","timestamp":"2025-05-26T16:06:01.824Z"}
 {"level":"info","message":"Server is running on port 3001","timestamp":"2025-05-26T16:11:47.706Z"}
 {"level":"info","message":"API Documentation available at http://localhost:3001/api-docs","timestamp":"2025-05-26T16:11:47.709Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-26T23:08:20.561Z"}
+{"level":"info","message":"API Documentation available at http://localhost:5000/api-docs","timestamp":"2025-05-26T23:08:20.565Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-26T23:39:45.101Z"}
+{"level":"info","message":"API Documentation available at http://localhost:5000/api-docs","timestamp":"2025-05-26T23:39:45.105Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-26T23:45:02.682Z"}
+{"level":"info","message":"API Documentation available at http://localhost:5000/api-docs","timestamp":"2025-05-26T23:45:02.686Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-27T00:06:56.935Z"}
+{"level":"info","message":"API Documentation available at http://localhost:5000/api-docs","timestamp":"2025-05-27T00:06:56.939Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-27T00:24:44.652Z"}
+{"level":"info","message":"API Documentation available at http://localhost:3000/api-docs","timestamp":"2025-05-27T00:24:44.656Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-27T00:27:24.073Z"}
+{"level":"info","message":"API Documentation available at http://localhost:3000/api-docs","timestamp":"2025-05-27T00:27:24.076Z"}
+{"level":"info","message":"Test candidate user created","timestamp":"2025-05-27T00:27:24.251Z"}
+{"level":"info","message":"Test recruiter user created","timestamp":"2025-05-27T00:27:24.329Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-27T00:29:56.520Z"}
+{"level":"info","message":"API Documentation available at http://localhost:3000/api-docs","timestamp":"2025-05-27T00:29:56.524Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-27T00:31:11.943Z"}
+{"level":"info","message":"API Documentation available at http://localhost:3000/api-docs","timestamp":"2025-05-27T00:31:11.946Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-27T00:33:14.787Z"}
+{"level":"info","message":"API Documentation available at http://localhost:5000/api-docs","timestamp":"2025-05-27T00:33:14.790Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-27T00:37:20.575Z"}
+{"level":"info","message":"API Documentation available at http://localhost:5000/api-docs","timestamp":"2025-05-27T00:37:20.578Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T00:39:29.488Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T00:39:29.493Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T00:39:56.489Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T00:39:56.492Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T00:44:22.847Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T00:44:22.850Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T00:44:23.785Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T00:44:23.787Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T00:44:24.238Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T00:44:24.241Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T00:44:24.678Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T00:44:24.681Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T00:44:25.099Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T00:44:25.101Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T00:44:25.427Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T00:44:25.430Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T00:46:04.270Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T00:46:04.274Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T00:46:45.923Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T00:46:45.925Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-27T00:47:35.957Z"}
+{"level":"info","message":"API Documentation available at http://localhost:5000/api-docs","timestamp":"2025-05-27T00:47:35.961Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-27T00:47:48.297Z"}
+{"level":"info","message":"API Documentation available at http://localhost:5000/api-docs","timestamp":"2025-05-27T00:47:48.300Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-27T02:02:46.660Z"}
+{"level":"info","message":"API Documentation available at http://localhost:5000/api-docs","timestamp":"2025-05-27T02:02:46.663Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-27T02:06:38.876Z"}
+{"level":"info","message":"API Documentation available at http://localhost:5000/api-docs","timestamp":"2025-05-27T02:06:38.880Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-27T02:11:56.540Z"}
+{"level":"info","message":"API Documentation available at http://localhost:5000/api-docs","timestamp":"2025-05-27T02:11:56.543Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T02:44:59.098Z"}
+{"level":"error","message":"Unhandled error:","timestamp":"2025-05-27T02:44:59.108Z"}

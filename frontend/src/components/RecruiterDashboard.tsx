@@ -50,6 +50,19 @@ export const RecruiterDashboard: React.FC = () => {
             </CardActions>
           </Card>
         </Grid>
+        <Grid item xs={12} md={4}>
+          <Card>
+            <CardContent>
+              <Typography variant="h6">Register Candidate</Typography>
+              <Typography variant="body2">Register a new candidate on their behalf with all required information.</Typography>
+            </CardContent>
+            <CardActions>
+              <Button fullWidth variant="contained" onClick={() => navigate('/recruiter/register-candidate')}>
+                Register Candidate
+              </Button>
+            </CardActions>
+          </Card>
+        </Grid>
       </Grid>
     </Box>
   );

@@ -18,46 +18,65 @@ model User {
   id        String   @id @default(uuid())
   email     String   @unique
   password  String
+  name      String
   role      UserRole @default(CANDIDATE)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@map("users")
+  candidate  Candidate?
+  recruiter  Recruiter?
 }
 
 model Candidate {
-  id              String    @id @default(uuid())
-  firstName       String
-  lastName        String
-  email           String    @unique
-  phone           String
-  country         String
-  address         String
-  education       String
-  experience      String
-  processStatus   ProcessStatus @default(IN_REVIEW)
-  cvUrl           String?
-  consentAccepted Boolean   @default(false)
-  consentAcceptedAt DateTime?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-  deletedAt       DateTime?
-
-  @@map("candidates")
+  id          String   @id @default(uuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id])
+  phone       String?
+  location    String?
+  experience  String?
+  education   String?
+  skills      String?
+  cvUrl       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  applications Application[]
 }
 
-// Enums
-enum UserRole {
-  CANDIDATE
-  RECRUITER
+model Recruiter {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  company   String?
+  position  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  offers    JobOffer[]
 }
 
-enum ProcessStatus {
-  NEW
-  IN_REVIEW
-  DISCARDED
-  FINALIST
-  HIRED
+model JobOffer {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  location    String?
+  salary      String?
+  requirements String?
+  dueDate     DateTime?
+  recruiterId String
+  recruiter   Recruiter @relation(fields: [recruiterId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  applications Application[]
+}
+
+model Application {
+  id          String   @id @default(uuid())
+  status      String   // "PENDING", "APPROVED", "REJECTED"
+  candidateId String
+  candidate   Candidate @relation(fields: [candidateId], references: [id])
+  jobOfferId  String
+  jobOffer    JobOffer  @relation(fields: [jobOfferId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 // Reference Data Models
@@ -79,4 +98,9 @@ model ExperienceOption {
   updatedAt   DateTime  @updatedAt
 
   @@map("experience_options")
+}
+
+enum UserRole {
+  CANDIDATE
+  RECRUITER
 }

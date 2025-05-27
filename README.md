@@ -24,7 +24,8 @@ Este proyecto es una aplicación full-stack con un frontend en React y un backen
 ## Screenshots
 
 ### Demo Credentials
-![Captura de pantalla 2025-05-26 012557](https://github.com/user-attachments/assets/63c86dde-02f0-4fdd-9582-e82c540aa653)
+recruiter@example.com password: password123
+candidate@example.com password: password123
 
 ### Login
 
@@ -39,7 +40,8 @@ Este proyecto es una aplicación full-stack con un frontend en React y un backen
 
 
 ### Recruiter Dashboard
-![Captura de pantalla 2025-05-26 025609](https://github.com/user-attachments/assets/c7e72de9-dc1e-4604-a980-6db44d3955d8)
+![image](https://github.com/user-attachments/assets/39d4bd69-8881-41c8-a617-c21e8cdddbef)
+
 
 ### Upload profile info
 ![image](https://github.com/user-attachments/assets/e72648f4-9a1a-49b7-9f8f-6f7f70d8f029)
